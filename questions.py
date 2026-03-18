@@ -1,5 +1,7 @@
 import random
-words = [
+
+# Modificacion 3. Añado las categorías.
+coding = [
     "python",
     "programa",
     "variable",
@@ -9,13 +11,51 @@ words = [
     "entero",
     "lista",
 ]
-word = random.choice(words)
+
+countries = [
+    "argentina",
+    "chile",
+    "uruguay",
+    "italia",
+    "china"
+]
+
+subjects = [
+    "matematicas",
+    "literatura",
+    "historia",
+    "geografia",
+    "biologia"
+]
+
+categories = {
+    "programacion": coding,
+    "paises": countries,
+    "materias": subjects,
+}
+
 guessed = []
 attempts = 6
 score = 0 
 
-print("¡Bienvenido al Ahorcado!")
+print("¡Bienvenido al Ahorcado!\n")
+print("Categorías: ")
+
+for clave in categories:
+    print(">", clave.capitalize()) # Muestro en mayúscula.
+
+# Ingreso la palabra y la fuerzo a que sea igual a la del diccionario con el .lower().
+# Muestro un mensaje si el usuario tiene un error de tipeo y vuelvo a pedir la categoría hasta que se ingrese una real.
+while True:
+    category = input("\nIngresa el nombre de la categoría a jugar: ").lower() 
+    if category in categories:
+        word = random.choice(categories[category]) 
+        break
+    else: 
+        print(f"Error, la categoría '{category}' no existe.")
+
 print()
+
 while attempts > 0:
     # Mostrar progreso: letras adivinadas y guiones para las que faltan
     progress = ""
@@ -32,12 +72,12 @@ while attempts > 0:
         break
     print(f"Intentos restantes: {attempts}")
     print(f"Letras usadas: {', '.join(guessed)}")
-    letter = input("Ingresá una letra: ")
     
-    if len(letter) != 1 or not letter.isalpha(): #Primera modificacion. Valido que el carácter ingresado es una letra.
+    letter = input("Ingresá una letra: ").lower()
+    
+    if len(letter) != 1 or not letter.isalpha(): 
         print ("\nEntrada no válida.\n")
-        continue # "Continúe el juego en la siguiente iteración"
-    
+        continue 
     if letter in guessed:
         print("Ya usaste esa letra.")
     elif letter in word:
@@ -53,4 +93,4 @@ else:
     print(f"¡Perdiste! La palabra era: {word}")
     score = 0
 
-print(f"Puntaje: {score}") #Segunda modificación, sistema de puntaje.
+print(f"Puntaje: {score}")
