@@ -1,15 +1,3 @@
-#Desarrollar un programa que simule la tabla de posiciones de un torneo de fútbol. El programa debe tener un menú
-#interactivo con las siguientes opciones:
-#Agregar un equipo al torneo.
-#Registrar un resultado ingresando equipo local, equipo visitante y marcador en formato 4 - 2. 
-#El programa debe actualizar los puntos automáticamente (3 puntos por victoria, 1 por empate, 0 por derrota).
-#Mostrar la tabla de posiciones ordenada de mayor a menor puntaje.
-#Eliminar un equipo del torneo.
-#Salir del programa.
-#Se deben manejar situaciones como intentar agregar un equipo ya existente, registrar un
-#resultado con un equipo
-#desconocido, o ingresar un marcador con formato inválido.
-
 leaderboard = {}
 
 while True:
@@ -26,7 +14,7 @@ while True:
     print()
     match option:
         case "1":
-            name = input("Ingrese el nombre del equipo: ").strip().title() #Las palabras ingresadas con errores de tipeo se formalizan.
+            name = input("Ingrese el nombre del equipo: ").strip().title() #las palabras ingresadas con errores de tipeo se formalizan.
             if name in leaderboard:
                 print(f"El equipo {name} ya se encuentra en el torneo.\n")
                 continue
@@ -62,7 +50,7 @@ while True:
             if local_goals > visitante_goals:
                 leaderboard[local] += 3
             elif local_goals < visitante_goals:
-                leaderboard[visitante]+= 3
+                leaderboard[visitante] += 3
             else:
                 leaderboard[local] += 1
                 leaderboard[visitante] += 1
@@ -72,7 +60,7 @@ while True:
                continue
 
             #sorted itera sobre el diccionario armando una lista, con key = lambda indico sobre cual elemento debo ordenar.
-            #con reverse indico si quiero que sea de menor a mayor o vicever1sa. (tengo que consultar si esto es correcto)
+            #con reverse indico si quiero que sea de menor a mayor o vicever1sa. (tengo que consultar si esto lo podemos implementar)
             leaderboard_org = sorted(leaderboard.items(), key=lambda x: x[1], reverse=True)
             print(f"{'EQUIPO':<15} | {'PUNTOS':^6} |")
             print("-" * 28)
